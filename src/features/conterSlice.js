@@ -8,33 +8,32 @@ const initialState={
 }
 
 
-const counterSlice = createSlice({
-    name:"counter",
-    initialState,
-    reducers:{
-        
+    const counterSlice = createSlice({
+        name:"counter",
+        initialState,
+        reducers:{
+            
 
-        addToCart:(state ,action)=>{
-            console.log('Rahul', initialState);
+            addToCart:(state ,action)=>{
 
-         const itemExist = state.cartList.find((item) => item.id===action.payload.id)
-         console.log(itemExist, "Item");
-         
-               if(itemExist){
+            const itemExist = state.cartList.find((item) => item.id===action.payload.id)
+            console.log(itemExist, "Item");
+            
+                if(itemExist){
 
-                        state.cartList.forEach((item) => {
-                console.log("item", item?.id);
-               if (item?.id === action.payload.id) {
-                  item.count++;
-               }
-            });
+                            state.cartList.forEach((item) => {
+                    console.log("item", item?.id);
+                if (item?.id === action.payload.id) {
+                    item.count++;
+                }
+                });
 
-                
-               }else{
-                state.cartList.push({
-                    ...action.payload,
-                    count:1,
-                
+                    
+                }else{
+                    state.cartList.push({
+                        ...action.payload,
+                        count:1,
+                    
 
         
             
@@ -62,8 +61,11 @@ const counterSlice = createSlice({
          }, 
 
         decrement:(state,action)=>{
-            console.log(state);
-            state.count1=state.count1-1
+              state.cartList.forEach((item)=>{
+                if(item?.id==action.payload){
+                    item.count--;
+                }
+              })
              
         },
         // change:(state,action)=>{
